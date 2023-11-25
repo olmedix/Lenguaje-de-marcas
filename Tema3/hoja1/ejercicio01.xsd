@@ -7,12 +7,13 @@
                 <xs:element ref="cliente"/>
                 <xs:element ref="articulos"/>
             </xs:sequence>
-            <xs:attribute ref="codigo" use="optional"/>
-            <xs:attribute ref="estado"/>
+            <xs:attribute ref="codigo" use="required"/>
+            <xs:attribute ref="estado" use="optional"/>
         </xs:complexType>
     </xs:element>
-    <xs:attribute name="codigo" type="xs:positiveInteger">
-    </xs:attribute>
+    
+    <xs:attribute name="codigo" type="xs:positiveInteger"/>
+
     <xs:attribute name="estado">
         <xs:simpleType>
             <xs:restriction base="xs:string">
@@ -39,12 +40,28 @@
         </xs:simpleType>
     </xs:element>
 
-    <xs:element name="articulos"/>
+    <xs:element name="articulos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="articulo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="articulo"/>
-    <xs:attribute name="iva"/>
+    <xs:element name="articulo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="descripcion" />
+                <xs:element ref="precioUnitario" />
+                <xs:element ref="unidades" />
+            </xs:sequence>
+            <xs:attribute ref="iva" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="descripcion"/>
+    <xs:attribute name="iva" type="xs:positiveInteger"/>
+
+    <xs:element name="descripcion" type="xs:string" />
 
     <xs:element name="precioUnitario">
         <xs:simpleType>
@@ -54,7 +71,7 @@
         </xs:simpleType>
     </xs:element>
 
-    <xs:element name="unidades"/>
+    <xs:element name="unidades" type="xs:positiveInteger" />
 
   
 
